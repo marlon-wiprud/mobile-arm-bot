@@ -1,0 +1,1 @@
+rosrun arm_to_goal arm_to_goal_node

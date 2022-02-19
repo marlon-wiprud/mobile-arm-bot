@@ -1,0 +1,1 @@
+roslaunch mobile_manipulator_body mobile_manipulator_gazebo.launch
