@@ -24,16 +24,12 @@ geometry_msgs::Twist turnRight(geometry_msgs::Twist cmd)
 
 geometry_msgs::Twist driveRight(geometry_msgs::Twist cmd)
 { 
-  driveForward(cmd);
-  turnRight(cmd);
-  return cmd;
+  return turnRight(driveForward(cmd));
 }
 
 geometry_msgs::Twist driveLeft(geometry_msgs::Twist cmd)
 { 
-  driveForward(cmd);
-  turnLeft(cmd);
-  return cmd;
+  return turnLeft(driveForward(cmd));
 }
 
 ros::Publisher new_arm_publisher(ros::NodeHandle nh)
@@ -112,6 +108,8 @@ void keyboard_control(ros::NodeHandle nh, ros::Publisher arm_pub, ros::Publisher
   const char key_zero = '0';
   const char key_shoulder_joint = 'i';
 
+  ROS_INFO("drive with w a d s");
+
   char cmd[50];
   while(nh.ok())
   {
@@ -125,7 +123,7 @@ void keyboard_control(ros::NodeHandle nh, ros::Publisher arm_pub, ros::Publisher
       break;
     
     case key_left:
-      publish_drive(cmd_vel_pub, driveLeft);
+        publish_drive(cmd_vel_pub, driveLeft);
       break;
     
     case key_right:
